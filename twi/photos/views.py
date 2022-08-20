@@ -15,6 +15,7 @@ def index(request):
 
 
 def detail(request, user_id):
+    print(100)
     """Process images uploaded by users"""
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
