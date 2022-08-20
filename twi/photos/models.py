@@ -32,3 +32,7 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Photos
         fields = ('user', 'image')
+
+
+
+

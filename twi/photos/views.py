@@ -1,11 +1,9 @@
-from pathlib import Path
-
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.regex_helper import Choice
 
-from .models import User, fs, ImageForm
+from .models import User, ImageForm
 
 
 def index(request):
@@ -15,7 +13,6 @@ def index(request):
 
 
 def detail(request, user_id):
-    print(100)
     """Process images uploaded by users"""
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
