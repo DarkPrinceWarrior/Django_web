@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db" uuid="a55773d0-8df4-4530-b3f4-b5cf61a5a0f1">
+    <data-source source="LOCAL" name="db " uuid="8eb91662-64dc-4945-a2b6-0775644a2f6c">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\user\Desktop\twi_project\twi\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\Ruslan\PycharmProjects\Django_web\twi\db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
