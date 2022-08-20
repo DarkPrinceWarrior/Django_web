@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+{% if user_information %}
+    <ul>
+    {% for user in user_information %}
+        <li><a href="/polls/{{ question.id }}/">{{ user.email_address }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No users are available.</p>
+{% endif %}
+</body>
+</html>
