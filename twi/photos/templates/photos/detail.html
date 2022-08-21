@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>user detail</title>
-</head>
-<body>
+{% extends "photos/base.html" %}
+{% block title %} user detail {% endblock %}
+
+{% block content %}
+
 <h3>{{ user.login }}</h3>
 <ul>
     <li>Email:  {{ user.email_address }}</li>
@@ -17,7 +15,5 @@
   <button type="submit">Upload</button>
 </form>
 
-
-</body>
-</html>
+{% endblock %}
 
