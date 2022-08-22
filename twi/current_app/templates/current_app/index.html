@@ -1,4 +1,4 @@
-{% extends "photos/base.html" %}
+{% extends "current_app/base.html" %}
 {% block title %} Home page {% endblock %}
 
 {% block content %}
@@ -7,7 +7,7 @@
     <h2> Users Logins</h2>
     <ul>
     {% for user in user_information %}
-        <h2><li><a href="{% url 'photos:detail' user.id %}">{{ user.login }}</a></li></h2>
+        <h2><li><a href="{% url 'current_app:detail' user.id %}">{{ user.login }}</a></li></h2>
     {% endfor %}
     </ul>
 {% else %}

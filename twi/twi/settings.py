@@ -39,7 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'photos.apps.PhotosConfig',
+    'current_app.apps.PhotosConfig',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

@@ -9,7 +9,7 @@ from .models import User, ImageForm
 
 def index(request):
     users = User.objects.all()
-    return render(request, template_name='photos/index.html',
+    return render(request, template_name='current_app/index.html',
                   context={'user_information': users})
 
 
@@ -20,9 +20,9 @@ def detail(request, user_id):
         if form.is_valid():
             form.save()
             # Get the current instance object to display in the template
-            return HttpResponseRedirect(reverse('photos:detail', args=(user_id,)))
+            return HttpResponseRedirect(reverse('current_app:detail', args=(user_id,)))
     else:
         form = ImageForm()
         user = get_object_or_404(User, pk=user_id)
-        return render(request, template_name='photos/detail.html',
+        return render(request, template_name='current_app/detail.html',
                       context={'form': form, 'user': user})
