@@ -1,14 +1,14 @@
-{% extends "current_app/base.html" %}
+{% extends "bot/base.html" %}
 {% block title %} Home page {% endblock %}
 
 {% block content %}
 
 {% if user_information %}
     <h2> Users Logins</h2>
-    <h3>HEloo!!!!</h3>
     <ul>
     {% for user in user_information %}
-        <h2><li><a href="{% url 'current_app:detail' user.id %}">{{ user.login }}</a></li></h2>
+        <h2><li><a href="{% url 'bot:detail' user.id %}">{{ user.login }}</a></li></h2>
+        <h2></h2>
     {% endfor %}
     </ul>
 {% else %}
