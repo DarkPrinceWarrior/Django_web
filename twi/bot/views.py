@@ -1,8 +1,11 @@
-from django.http import HttpResponseRedirect
+from aiogram import Dispatcher, Bot
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-
 from .models import User, ImageForm
+
+
+
 
 
 def index(request):
@@ -24,3 +27,12 @@ def detail(request, user_id):
         user = get_object_or_404(User, pk=user_id)
         return render(request, template_name='bot/detail.html',
                       context={'form': form, 'user': user})
+
+
+async def start_bot(request, token_id):
+    # start a bot
+
+    dp = Dispatcher()
+    bot = Bot(token=token_id)
+    return HttpResponse(f"Hello bot -- id: {token_id}")
+
