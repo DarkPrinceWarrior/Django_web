@@ -30,9 +30,10 @@ def detail(request, user_id):
 
 def choose_bot(request):
     # choose a bot from dropdown menu
-    bots = Bot.objects.all()
     form = BotList_form()
-    return render(request, template_name='bot/BotList.html')
+    list_bots = Bot.objects.all()
+    return render(request, template_name='bot/BotList.html', context={'form': form,
+                                                                      "bots_list": list_bots})
 
 
 async def start_bot(request, token_id):

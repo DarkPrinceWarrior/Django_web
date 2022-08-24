@@ -57,3 +57,9 @@ p {
     margin-right: 0.5rem;
     margin-left: 1rem;
 }
+
+/*form for bots page where select */
+select_bots {
+    word-wrap: normal;
+    margin-left: 1rem;
+}

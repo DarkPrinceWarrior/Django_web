@@ -45,6 +45,8 @@ class ImageForm(forms.ModelForm):
         model = Photos
         fields = ('user', 'image')
 
+# {"ok":true,"result":{"id":5442595961,"is_bot":true,"first_name":"two_bot","username":"twi_safaev_bot",
+#                      "can_join_groups":true,"can_read_all_group_messages":false,"supports_inline_queries":false}}
 
 class Bot(models.Model):
     class Meta:
@@ -91,4 +93,4 @@ class BotList_form(forms.ModelForm):
 
     class Meta:
         model = Bot
-        fields = ('token',)
+        fields = ['token']
