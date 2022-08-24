@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .management.commands.startbot import start_message, bot
-from .models import User, ImageForm, Bot
+from .models import User, ImageForm, Bot, BotList_form
+import requests
 
 
 def index(request):
@@ -18,7 +19,7 @@ def detail(request, user_id):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # Get the current instance object to display in the template
+            # Get the current instance object to display in the templates
             return HttpResponseRedirect(reverse('bot:detail', args=(user_id,)))
     else:
         form = ImageForm()
@@ -30,12 +31,11 @@ def detail(request, user_id):
 def choose_bot(request):
     # choose a bot from dropdown menu
     bots = Bot.objects.all()
-    return render(request, template_name='bot/BotList.html',
-                  context={'bots_information': bots})
+    form = BotList_form()
+    return render(request, template_name='bot/BotList.html')
 
 
 async def start_bot(request, token_id):
     # start a bot
-    bot._token = token_id
-    print(bot._token)
-    return HttpResponse(f"Hello bot -- id: {token_id}")
+    get_bot = requests.get(f'https://api.telegram.org/bot{token_id}/getMe')
+    return HttpResponse(f"Results:  {get_bot.json()}")

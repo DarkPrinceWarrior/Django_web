@@ -5,4 +5,12 @@
 
 <h3>Choose bot</h3>
 
+<label class="label_bots_select_list" for="bots">Choose bot:</label>
+
+<form method="post" action="" id="bots" enctype="multipart/form-data">
+  {% csrf_token %}
+   {{ form.as_p }}
+  <button class="button_upload" type="submit">confirm this bot</button>
+</form>
+
 {% endblock %}

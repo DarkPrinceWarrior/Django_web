@@ -1,9 +1,20 @@
 from django import forms
-from django.contrib.sites import requests
 from django.core.files.storage import FileSystemStorage
 from django.db import models
+import requests
+from aiogram import Bot as Tbot
+from requests import Response
 
 fs = FileSystemStorage(location='/media/images')
+
+# for the bot
+STOPPED = 0
+RUNNING = 1
+
+BOT_STATUS_CHOICES = (
+    (RUNNING, 'Running'),
+    (STOPPED, 'Stopped'),
+)
 
 
 class User(models.Model):
@@ -36,6 +47,9 @@ class ImageForm(forms.ModelForm):
 
 
 class Bot(models.Model):
+    class Meta:
+        db_table = 'bots'
+
     id = models.AutoField(primary_key=True, help_text="Database ID")
     tid = models.IntegerField(null=False, unique=True, editable=False,
                               help_text="Telegram API ID")
@@ -45,26 +59,36 @@ class Bot(models.Model):
     username = models.CharField(max_length=64, unique=False, null=False, editable=False)
     owner = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    status = models.IntegerField(choices=BOT_STATUS_CHOICES, default=STOPPED)
 
     @staticmethod
-    def check_token(token: str) -> bool:
+    def check_token(token: str) -> Response:
         print(token)
-        # https: // api.telegram.org / bot5442595961: AAFW_4y8vesQaPMQZXhrKruPNVXIPTHoauc / getMe
         response = requests.get(f"https://api.telegram.org/bot{token}/getMe")
         if response.status_code == 200:
-            return True
+            return response
         else:
             print(response.status_code)
             raise ValueError("Telegram response status code is not 200 :(")
 
-    # def save(self, *args, **kwargs):
-    #     print("ARGS", args)
-    #     print("KWARGS", kwargs)
-    #     if self.check_token(self.token):
-    #         bot = TBot(token=self.token)
-    #         self.tid = bot.id
-    #         self.username = bot.username
-    #         super(Bot, self).save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        print("ARGS", args)
+        print("KWARGS", kwargs)
+        response = self.check_token(str(self.token))
+        if response.status_code:
+            bot = Tbot(token=str(self.token))
+            self.tid = bot.id
+            bot_json = response.json()
+            self.username = bot_json['result']['username']
+            super(Bot, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"<Bot id: {self.id} tid: {self.tid}>"
+
+
+class BotList_form(forms.ModelForm):
+    """Form for the Bot model"""
+
+    class Meta:
+        model = Bot
+        fields = ('token',)

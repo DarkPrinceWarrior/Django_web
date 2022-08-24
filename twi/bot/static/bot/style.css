@@ -50,3 +50,10 @@ p {
 .button_upload{
     margin-left: 1rem;
 }
+
+.label_bots_select_list {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    margin-left: 1rem;
+}
