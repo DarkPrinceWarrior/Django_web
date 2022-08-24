@@ -1,13 +1,12 @@
-
 from django.core.management.base import BaseCommand
 from aiogram import types
 
-def register_user_commands(router: Router) ->None:
-    router.message.register(start,)
+from twi.bot import dp
 
-async def start_bot(message: types.Message) -> None:
+
+@dp.message_handler(commands=['start', 'help'])
+async def start_message(message: types.Message):
     await message.answer('hello there!')
-
 
 # class Command(BaseCommand):
 #     help = "Start bot"

@@ -1,7 +1,10 @@
-from aiogram import Dispatcher, Bot
+from aiogram import Dispatcher, Bot, executor
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+
+from . import bot
+from .management.commands.startbot import start_message
 from .models import User, ImageForm
 
 
@@ -31,8 +34,8 @@ def detail(request, user_id):
 
 async def start_bot(request, token_id):
     # start a bot
-
-    dp = Dispatcher()
-    bot = Bot(token=token_id)
+    bot._token = token_id
+    print(bot._token)
+    await start_message()
     return HttpResponse(f"Hello bot -- id: {token_id}")
 
