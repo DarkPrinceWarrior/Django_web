@@ -14,4 +14,6 @@ urlpatterns = [
     # path('user/<int:pk>/', views.DetailView.as_view(), name='detail'),
 
     path('bot/<str:token_id>/', views.start_bot, name='start_bot'),
+
+    path('bot/', views.choose_bot, name='choose_bot'),
 ]

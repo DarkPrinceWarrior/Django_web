@@ -2,13 +2,8 @@ from aiogram import Dispatcher, Bot, executor
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-
-from . import bot
-from .management.commands.startbot import start_message
-from .models import User, ImageForm
-
-
-
+from .management.commands.startbot import start_message, bot
+from .models import User, ImageForm, Bot
 
 
 def index(request):
@@ -32,10 +27,15 @@ def detail(request, user_id):
                       context={'form': form, 'user': user})
 
 
+def choose_bot(request):
+    # choose a bot from dropdown menu
+    bots = Bot.objects.all()
+    return render(request, template_name='bot/BotList.html',
+                  context={'bots_information': bots})
+
+
 async def start_bot(request, token_id):
     # start a bot
     bot._token = token_id
     print(bot._token)
-    await start_message()
     return HttpResponse(f"Hello bot -- id: {token_id}")
-
